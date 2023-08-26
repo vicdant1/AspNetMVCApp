@@ -20,6 +20,10 @@ builder.Services.AddIdentity<AppUser, IdentityRole>()
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+builder.Services.ConfigureApplicationCookie(opt =>
+{
+    opt.AccessDeniedPath = "/ApplicationError/AccessDenied";
+});
 
 var app = builder.Build();
 
