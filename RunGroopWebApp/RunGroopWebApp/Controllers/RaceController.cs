@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RunGroopWebApp.Data;
+using RunGroopWebApp.Models;
 
 namespace RunGroopWebApp.Controllers
 {
@@ -24,6 +25,26 @@ namespace RunGroopWebApp.Controllers
         {
             var race = _context.Races.Include(r => r.Address).FirstOrDefault(r => r.Id == id);
             return View(race);
+        }
+
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Race race)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(race);
+            }
+
+            _context.Races.Add(race);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
     }
 }
