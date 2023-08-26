@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RunGroopWebApp.Data;
 using RunGroopWebApp.Models;
@@ -8,10 +9,12 @@ namespace RunGroopWebApp.Controllers
     public class RaceController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public RaceController(AppDbContext context)
+        public RaceController(AppDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -40,6 +43,11 @@ namespace RunGroopWebApp.Controllers
             {
                 return View(race);
             }
+
+
+            var currentUserId = _userManager.GetUserId(User);
+            race.AppUserId = currentUserId;
+
 
             _context.Races.Add(race);
             await _context.SaveChangesAsync();

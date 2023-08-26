@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RunGroopWebApp.Data;
 using RunGroopWebApp.Models;
@@ -9,10 +10,12 @@ namespace RunGroopWebApp.Controllers
     public class ClubController : Controller
     {
         private AppDbContext _context { get; }
+        private readonly UserManager<AppUser> _userManager;
 
-        public ClubController(AppDbContext context)
+        public ClubController(AppDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
 
@@ -42,6 +45,9 @@ namespace RunGroopWebApp.Controllers
             {
                 return View(club);
             }
+
+            var currentUserId = _userManager.GetUserId(User);
+            club.AppUserId = currentUserId;
 
             _context.Clubs.Add(club);
             await _context.SaveChangesAsync();
