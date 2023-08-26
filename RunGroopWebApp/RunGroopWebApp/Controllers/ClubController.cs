@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RunGroopWebApp.Data;
@@ -7,6 +8,7 @@ using RunGroopWebApp.Models.ViewModels;
 
 namespace RunGroopWebApp.Controllers
 {
+    [Authorize]
     public class ClubController : Controller
     {
         private AppDbContext _context { get; }
@@ -18,7 +20,7 @@ namespace RunGroopWebApp.Controllers
             _userManager = userManager;
         }
 
-
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var clubs = _context.Clubs.Include(c => c.Address).ToList();
@@ -56,6 +58,7 @@ namespace RunGroopWebApp.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var club = _context.Clubs.Where(c => c.Id == id).FirstOrDefault();
