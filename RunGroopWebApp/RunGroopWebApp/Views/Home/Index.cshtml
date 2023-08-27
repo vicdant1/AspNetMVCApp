@@ -5,14 +5,94 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
 
-
-
-
-    PENDENCIAS
-    - jquery validation
-    - jquery inputmask
-    - datatables
-    - refresh view after perform
+    <input class="form-control mt-2 decimalmoney" placeholder="Valor"/>
+    <input class="form-control mt-2 cnfCnpj" placeholder="CPF/CNPJ" />
+    <input class="form-control mt-2" type="text" id="mobile" name="mobile" placeholder="(11) 99999-9999">
+    <input class="form-control mt-2" type="text" id="cep" name="cep" placeholder="59.203-102">
+  
 
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+
+    <div class="container">
+        <h1>Validação de formulários com JQuery Validation</h1>
+        <form name="formCadastro" id="formCadastro" >
+            <div class="row">
+                <label>Nome</label>
+                <input type="text" name="nome" id="nome" class="form-control" />
+            </div>
+            <div class="row">
+                <label>E-mail</label>
+                <input type="email" name="email" id="email" class="form-control" />
+            </div>
+            <div class="row">
+                <label>Cidade</label>
+                <select name="cidade" id="cidade" class="form-control">
+                    <option value="">----</option>
+                    <option value="APARECIDA">Aparecida</option>
+                    <option value="GUARATINGUETA">Guaratinguetá</option>
+                    <option value="CUNHA">Cunha</option>
+                </select>
+            </div>
+            <div class="row">
+                <label>Idade</label>
+                <input type="number" name="idade" id="idade" class="form-control" />
+            </div>
+            <div class="row">
+                <label>Instagram</label>
+                <input type="text" name="instagram" id="instagram" class="form-control" />
+            </div>
+            <div class="row">
+                <input type="submit" name="enviar" id="enviar" class="btn btn-primary form-control" />
+            </div>
+        </form>
+    </div>
 </div>
+@*Partial <<<<<<<<<<<<< views are not allowed to use @section scripts {} by default*@
+@section Scripts {
+
+    <script>
+
+        $(document).ready(function(){
+            // Masks
+            $(".decimalmoney").inputmask('decimal', {
+                'alias': 'numeric',
+                'groupSeparator': '.',
+                'autoGroup': true,
+                'digits': 2,
+                'radixPoint': ",",
+                'digitsOptional': false,
+                'allowMinus': false,
+                'prefix': 'R$',
+            });
+            $(".cnfCnpj").inputmask({
+                mask: ['999.999.999-99', '99.999.999/9999-99'],
+                keepStatic: true
+            });
+            $("#mobile").inputmask("(99) 9999-9999");
+            $("#cep").inputmask("99.999-999");
+
+            // Validations
+            $("#formCadastro").validate({
+                rules: {
+                    nome: {
+                        required: true,
+                        maxlength: 100,
+                        minlength: 10
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    cidade: {
+                        required: true,
+                    }
+                },
+                submitHandler: function (form) {
+                   console.log(form);
+                }
+            });
+        })
+
+    </script>
+}
