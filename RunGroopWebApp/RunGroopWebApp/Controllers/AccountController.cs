@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using RunGroopWebApp.Data;
 using RunGroopWebApp.Models;
 using RunGroopWebApp.Models.ViewModels;

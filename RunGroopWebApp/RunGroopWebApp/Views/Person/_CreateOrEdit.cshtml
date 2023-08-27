@@ -1,0 +1,35 @@
+﻿@using RunGroopWebApp.Models.ViewModels;
+@model CreateOrEditPersonViewModel
+
+<form>
+    <div class="modal-body">
+        <input hidden asp-for="Id"/>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" placeholder="Nome">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="RG"></label>
+            <input asp-for="RG" class="form-control" placeholder="Nome">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BirthDate"></label>
+            <input asp-for="BirthDate" class="form-control" placeholder="Nome">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button id="saveButton" type="button" class="btn btn-primary">Salvar</button>
+    </div>
+</form>
+
+
+<script>
+    $(document).ready(function(){
+        $('#saveButton').on('click', function(){
+            submitModalData('Person/CreateOrEdit', 'POST', 'form', '#createOrEditModal');
+        })
+    });
+</script>

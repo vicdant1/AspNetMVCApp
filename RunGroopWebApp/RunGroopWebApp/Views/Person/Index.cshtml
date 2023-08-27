@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Person>
+
+<div class="row">
+    <div class="col-md-8"><h1>Pessoas</h1></div>
+    <div class="col-md-4 d-flex justify-content-end">
+        <button id="createButton" class="btn btn-primary">Create</button>
+    </div>
+</div>
+
+@if (Model.Any())
+{
+    <ul>
+
+        @foreach (var person in Model)
+        {
+            <li>
+                @person.Name (@person.RG) - ~@(DateTime.Now.Year - person.BirthDate.Year) years
+
+                <button class="btn btn-primary" onclick="editPerson(@person.Id)">edit</button>
+                <button class="btn btn-danger" onclick="deletePerson(@person.Id)">delete</button>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Sem pessoas cadastradas :'(</p>
+}
+
+
+@section Scripts {
+<script>
+    $(document).ready(function(){
+        $('#createButton').on("click", function(){
+            showModal('Person/CreateOrEdit', 'GET', '#createOrEditModal', 'Criar Pessoa');
+        });
+    });
+
+    function editPerson(id) {
+        showModal('Person/CreateOrEdit/' + id, 'GET', '#createOrEditModal', 'Editar Pessoa')
+    }
+
+    function deletePerson(id) {
+        Swal.fire({
+            title: 'Deseja realmente deletar o registro?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Deletar',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                performRequest('Person/DeletePerson/' + id, "POST")
+            }
+        })
+    }
+</script>
+}
