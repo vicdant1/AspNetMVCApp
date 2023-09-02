@@ -1,4 +1,14 @@
 ﻿
+
+// General system functions
+function startLoading() {
+    $(".loadingIndicator").show();
+}
+
+function finishLoading() {
+    $(".loadingIndicator").hide();
+}
+
 // AJAX Modal Functions
 // Function to populate modal with data from controller (it may be a form or plain data)
 function showModal(url, requestType, modalId, title) {
@@ -20,15 +30,16 @@ function showModal(url, requestType, modalId, title) {
                 text: "Algo deu errado: " + jsonResponse.message,
                 icon: "error"
             })
-        }
+        },
     });
 }
 
 // Submit data from a form to an action (mainly to create or edit)
 function submitModalData(url, requestType, formSelector, modalId, closeOnSuccess = true) {
+    startLoading();
+
     let form = document.querySelector(formSelector);
     let formData = new FormData(form);
-
     const data = {};
     // Loop through the FormData using the forEach method
     formData.forEach((value, key) => {
@@ -62,12 +73,17 @@ function submitModalData(url, requestType, formSelector, modalId, closeOnSuccess
                 text: "Algo deu errado: " + jsonResponse.message,
                 icon: "error"
             })
+        },
+        complete: function () {
+            finishLoading();
         }
     });
+
 }
 
 // Perform a request to an url and retrieves its informations (message)
 function performRequest(url, requestType) {
+    startLoading();
     $.ajax({
         url,
         type: requestType,
@@ -90,17 +106,10 @@ function performRequest(url, requestType) {
                 text: "Algo deu errado: " + jsonResponse.message,
                 icon: "error"
             })
+        },
+        complete: function () {
+            finishLoading();
         }
     });
 }
 
-
-// General system functions
-
-function setLoading() {
-    $(".loadingIndicator").show();
-}
-
-function finishLoading() {
-    $(".loadingIndicator").hide();
-}
