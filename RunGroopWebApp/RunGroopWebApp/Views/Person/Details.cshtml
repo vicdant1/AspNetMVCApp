@@ -1,0 +1,20 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+@model Person
+
+
+<!-- o ideal é criar outra view se a intenção for colocar isso dentro de uma modal -->
+
+<div>
+
+    <a asp-action="Index">Voltar</a>
+    <ul>
+        <li>Nome: @Model.Name</li>
+        <li>Data Nascimento: @Model.BirthDate.ToString("dd/MM/yyyy")</li>
+        <li>RG: @Model.RG</li>
+    </ul>
+</div>

@@ -93,3 +93,14 @@ function performRequest(url, requestType) {
         }
     });
 }
+
+
+// General system functions
+
+function setLoading() {
+    $(".loadingIndicator").show();
+}
+
+function finishLoading() {
+    $(".loadingIndicator").hide();
+}

@@ -47,12 +47,13 @@
             </div>
         </form>
     </div>
+
+    <button class="btn btn-outline-primary" onclick="testLoad()">load test</button>
 </div>
 @*Partial <<<<<<<<<<<<< views are not allowed to use @section scripts {} by default*@
 @section Scripts {
 
     <script>
-
         $(document).ready(function(){
             // Masks
             $(".decimalmoney").inputmask('decimal', {
@@ -93,6 +94,14 @@
                 }
             });
         })
+
+
+        function testLoad() {
+            setLoading();
+            setTimeout(() => {
+                finishLoading();
+            }, "1000")
+        }
 
     </script>
 }

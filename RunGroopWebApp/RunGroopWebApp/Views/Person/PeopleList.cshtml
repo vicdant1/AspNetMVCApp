@@ -1,0 +1,8 @@
+﻿@model List<Person>
+
+<div class="row g-2">
+    @foreach(var person in Model)
+    {
+        <partial name="~/Views/Partials/Person/_PersonCard.cshtml" model="person"></partial>
+    }
+</div>

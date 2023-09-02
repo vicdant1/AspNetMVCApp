@@ -1,0 +1,14 @@
+﻿@model Person
+
+
+<!-- In order to bootstrap gutter work, we need to define colunms configs on an external div -->
+<div class="col-xs-12 col-sm-6 col-md-4">
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <p class="card-text">@Model.BirthDate.ToString("dd/MM/yyyy")</p>
+            <a class="btn btn-primary" asp-action="Details" asp-route-id="@Model.Id">Detalhes</a>
+            <a class="btn btn-secondary" onclick="showModal('/Person/Details/' + @Model.Id, 'GET', '#detailsModal', 'Detalhes')">Detalhes Modal</a>
+        </div>
+    </div>
+</div>

@@ -16,7 +16,7 @@ namespace RunGroopWebApp.Controllers
 
         public ActionResult Index() 
         {
-            var people = _context.People.Where(p => p.IsDeleted == null || !p.IsDeleted.Value).ToList();
+            var people = _context.People.Where(p => (p.IsDeleted == null || !p.IsDeleted.Value)).ToList();
 
 
             return View(people);
@@ -40,6 +40,23 @@ namespace RunGroopWebApp.Controllers
             }
 
             return PartialView("_CreateOrEdit");
+        }
+
+        [HttpGet]
+        public IActionResult PeopleList()
+        {
+            var people = _context.People.Where(p => (p.IsDeleted == null || !p.IsDeleted.Value)).ToList();
+
+            return View(people);
+        }
+
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var person = _context.People.Where(p => (p.IsDeleted == null || !p.IsDeleted.Value) && p.Id == id).FirstOrDefault();
+
+            return View(person);
         }
 
         [HttpPost]

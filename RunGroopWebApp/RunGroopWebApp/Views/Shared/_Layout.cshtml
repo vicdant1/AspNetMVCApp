@@ -75,6 +75,20 @@
         </div>
     </div>
 
+    <!-- Details -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="detailsModalLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modalContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <partial name="~/Views/Partials/Application/_LoadingSpinner.cshtml"></partial>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -86,6 +100,9 @@
             &copy; 2023 - RunGroopWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+
+
     <script src="~/lib/sweetalert2.all.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/plugins/inputmask/jquery.inputmask.min.js"></script>
