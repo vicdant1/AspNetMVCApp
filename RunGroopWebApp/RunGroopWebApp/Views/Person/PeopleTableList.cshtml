@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Listagem de pessoas";
+}
+@model List<Person>
+
+
+    Search way - customize datatables
+<table class="table table-striped datatable">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">RG</th>
+            <th scope="col">Nascimento</th>
+            <th scope="col">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model)
+        {
+            <tr>
+                <td>@person.Id</td>
+                <td>@person.Name</td>
+                <td>@person.RG</td>
+                <td>@person.BirthDate.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <button class="btn btn-primary">Editar</button>
+                    <button class="btn btn-danger">Excluir</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function(){
+           
+        })
+    </script>
+}

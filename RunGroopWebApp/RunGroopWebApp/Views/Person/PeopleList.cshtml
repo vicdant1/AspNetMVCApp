@@ -3,6 +3,9 @@
 <div class="row g-2">
     @foreach(var person in Model)
     {
-        <partial name="~/Views/Partials/Person/_PersonCard.cshtml" model="person"></partial>
+        <!-- In order to bootstrap gutter work, we need to define colunms configs on an external div -->
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <partial name="~/Views/Partials/Person/_PersonCard.cshtml" model="person"></partial>
+        </div>
     }
 </div>

@@ -50,6 +50,14 @@ namespace RunGroopWebApp.Controllers
             return View(people);
         }
 
+        [HttpGet]
+        public IActionResult PeopleTableList()
+        {
+            var people = _context.People.Where(p => (p.IsDeleted == null || !p.IsDeleted.Value)).ToList();
+
+            return View(people);
+        }
+
 
         [HttpGet]
         public IActionResult Details(int id)

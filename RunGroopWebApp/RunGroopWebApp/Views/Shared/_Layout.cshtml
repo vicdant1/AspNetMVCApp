@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - RunGroopWebApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/DataTables/datatables.min.css"  />
     <link rel="stylesheet" href="~/RunGroopWebApp.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -108,10 +109,8 @@
     <script src="~/plugins/inputmask/jquery.inputmask.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/plugins/jquery-validation-messages/messages_pt_BR.min.js"></script>
-
-
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="~/lib/DataTables/datatables.min.js"></script>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
